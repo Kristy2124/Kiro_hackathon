@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="manifest" href="manifest.json">
+    <button id="installBtn" style="display:none;">Install App</button>
+    <title>Camera</title>
+    <style>
+        body,html{
+            height: 100%;
+            margin:0;
+            background-color: #F0F4F3;
+            display: flex;
+            align-items: center; /*vertical center*/
+            flex-direction: column; /*stack children vertically*/
+            
+
+        }
+        .camera_button{
+            position: fixed;
+            bottom: 80px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: none;/*removes the default button background color*/
+            border: none; /*removes the default border from the button*/
+        }
+        video {
+            width: 900px;
+            border: 5px solid black;
+            border-radius: px;
+        }
+    </style>
+</head>
+<body>
+    <video id="camera" autoplay playsinline></video>
+    <div>
+        <button class = "camera_button"id = "captureButton" disabled?>
+            <img src = "images/camera_button.png">
+        </button>
+    </div>
+    <script src="functionality.js"></script>
+</body>
+</html>
