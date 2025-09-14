@@ -83,6 +83,14 @@
     const resultDiv = document.getElementById('result');
     const rawResult = localStorage.getItem('apiResult');
 
+    //AndriodBridge
+    if (window.AndroidBridge && typeof window.AndroidBridge.sendPrediction === 'function') {
+        AndroidBridge.sendPrediction(category);
+    } else {
+        console.warn("AndroidBridge.sendPrediction not available.");
+    }
+
+    //Checking for the output
     if (!rawResult) {
         resultDiv.textContent = "No analysis results found.";
         return;
@@ -101,4 +109,5 @@
     </script>
 
 </body>
+
 </html>
