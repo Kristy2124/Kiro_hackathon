@@ -5,7 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://fonts.googleapis.com/css2?family=Alegreya&family=Kavoon&display=swap" rel="stylesheet">
     <link rel="manifest" href="manifest.json">
-    <button id="installBtn" style="display:none;">Install App</button>
     <title>Analysis</title>
 </head>
 <style>
@@ -83,13 +82,6 @@
     const resultDiv = document.getElementById('result');
     const rawResult = localStorage.getItem('apiResult');
 
-    //AndriodBridge
-    if (window.AndroidBridge && typeof window.AndroidBridge.sendPrediction === 'function') {
-        AndroidBridge.sendPrediction(category);
-    } else {
-        console.warn("AndroidBridge.sendPrediction not available.");
-    }
-
     //Checking for the output
     if (!rawResult) {
         resultDiv.textContent = "No analysis results found.";
@@ -99,9 +91,16 @@
     try {
         const category = JSON.parse(rawResult);
         resultDiv.innerHTML = `<p>Prediction: <strong>${category}</strong></p>`;
+        //AndriodBridge
+        if (window.AndroidBridge && typeof window.AndroidBridge.sendPrediction === 'function') {
+            AndroidBridge.sendPrediction(category);
+        } else {
+            console.warn("AndroidBridge.sendPrediction not available.");
+        }
     } catch (e) {
         resultDiv.textContent = "Error parsing analysis result.";
     }
+    
     };
     setTimeout(() => {
         window.location.href = "end_or_continue.html";
@@ -111,3 +110,4 @@
 </body>
 
 </html>
+
